@@ -154,11 +154,18 @@ form.addEventListener('submit', (e) => {
   const ageValue = +ageInput.value;
   const salaryValue = +salaryInput.value;
 
+  const existingNotification = document.querySelector(
+    '[data-qa="notification"]',
+  );
+
+  if (existingNotification) {
+    existingNotification.remove();
+  }
+
   const notification = document.createElement('div');
 
   notification.setAttribute('data-qa', 'notification');
 
-  // Validation checks
   if (nameValue.length < 4 || !positionValue) {
     notification.classList.add('error');
 
@@ -197,12 +204,10 @@ form.addEventListener('submit', (e) => {
 
   tbody.appendChild(newRow);
 
-  // Success notification
   notification.classList.add('success');
   notification.textContent = 'Employee added successfully!';
   form.after(notification);
 
-  // Reset form fields
   form.reset();
 });
 
